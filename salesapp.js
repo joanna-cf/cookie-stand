@@ -67,7 +67,7 @@ var hours = ['8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '
 var html_headings = ['pike', 'seatac', 'seattleC', 'capitol', 'alki'];
 var locations = [pike, seatac, seattleC, capitol, alki];
 
-//Function that generates cookies sold per hour, and pushes it into an array
+//Defines function that generates cookies sold per hour, and pushes it into an array
 function calculate_hourly_cookies(){
   for (var i = 0; i < hours.length; i++){
     var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
@@ -80,35 +80,35 @@ function calculate_hourly_cookies(){
   }
 };
 
-//function to calculate numbers for page by looping through array of locations
+//Defines function to add hourly totals to page 
+function add_hourly_total_to_page(oranges){
+  for (var i = 0; i < hours.length; i++){
+    var sold_list = document.getElementById(html_headings[oranges]);
+    var hour_list = document.createElement('li');
+    hour_list.textContent = `${hours[i]}: ${locations[oranges].hourly_total[i]}`;
+    sold_list.appendChild(hour_list);
+  }
+};
+
+//Defines function to add location totals to page
+function add_total_to_page(apples){
+  var sold_list = document.getElementById(html_headings[apples]);
+  var total = document.createElement('li');
+  total.textContent = 'Total: ' + this.location_total;
+  sold_list.appendChild(total);
+};
+
+//Function to loop through locations to calculate all of the above!
 var calculate_by_location = function (){
   for(var k=0; k < locations.length; k++){
     //Calls function to generate cookies
     locations[k].calculate_hourly_cookies = calculate_hourly_cookies;
-
-    //Defines function to add hourly totals to page 
-    //TODO: Move this out of the function somehow? But it references the index k which is in this for loop...
-    locations[k].add_hourly_total_to_page = function add_hourly_total_to_page(){
-      for (var i = 0; i < hours.length; i++){
-        var sold_list = document.getElementById(html_headings[k]);
-        var hour_list = document.createElement('li');
-        hour_list.textContent = `${hours[i]}: ${locations[k].hourly_total[i]}`;
-        sold_list.appendChild(hour_list);
-      }
-    };
-
-    //Defines function to add location totals to page
-    //TODO: Move this out of the function somehow so it's not defined every time.
-    locations[k].add_total_to_page = function add_total_to_page(){
-      var sold_list = document.getElementById(html_headings[k]);
-      var total = document.createElement('li');
-      total.textContent = 'Total: ' + this.location_total;
-      sold_list.appendChild(total);
-    };
+    locations[k].add_hourly_total_to_page = add_hourly_total_to_page;
+    locations[k].add_total_to_page = add_total_to_page;
 
     locations[k].calculate_hourly_cookies();
-    locations[k].add_hourly_total_to_page();
-    locations[k].add_total_to_page();
+    locations[k].add_hourly_total_to_page(k);
+    locations[k].add_total_to_page(k);
   }
 }
 
