@@ -21,9 +21,7 @@ function getRandomIntInclusive(min, max){
   return Math.floor(Math.random()*(max - min + 1)) + min;
 }
 
-var hours = ['8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
-//Define object
+//Define the 5 stores as objects
 var pike = {
   min_customers: 23,
   max_customers: 65,
@@ -64,40 +62,49 @@ var alki = {
   location_total: 0
 };
 
-var locations = [pike, seatac, seattleC, capitol, alki];
+//Array with hours, headings, and objects
+var hours = ['8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var html_headings = ['pike', 'seatac', 'seattleC', 'capitol', 'alki'];
+var locations = [pike, seatac, seattleC, capitol, alki];
 
 //Function that generates cookies sold per hour, and pushes it into an array
+function calculate_hourly_cookies(){
+  for (var i = 0; i < hours.length; i++){
+    var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
+    var sold_cookies_raw = customers * this.avg_cookies;
+    console.log(sold_cookies);
+    //Truncation, Cite: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
+    var sold_cookies = Math.trunc(sold_cookies_raw);
+    this.hourly_total.push(sold_cookies);
+    this.location_total = this.location_total + this.hourly_total[i];
+  }
+};
 
+//function to calculate numbers for page by looping through array of locations
 var calculate_by_location = function (){
-
   for(var k=0; k < locations.length; k++){
-    locations[k].calculate_hourly_cookies = function(){
-      for (var i = 0; i < hours.length; i++){
-        var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
-        var sold_cookies = customers * this.avg_cookies;
-        console.log(sold_cookies);
-        this.hourly_total.push(sold_cookies);
-        this.location_total = this.location_total + this.hourly_total[i];
-      }
-    };
+    //Calls function to generate cookies
+    locations[k].calculate_hourly_cookies = calculate_hourly_cookies;
 
-    //Create li for each hour, include totals from above
-    locations[k].add_hourly_total_to_page = function(){
+    //Defines function to add hourly totals to page 
+    //TODO: Move this out of the function somehow? But it references the index k which is in this for loop...
+    locations[k].add_hourly_total_to_page = function add_hourly_total_to_page(){
       for (var i = 0; i < hours.length; i++){
         var sold_list = document.getElementById(html_headings[k]);
         var hour_list = document.createElement('li');
         hour_list.textContent = `${hours[i]}: ${locations[k].hourly_total[i]}`;
         sold_list.appendChild(hour_list);
       }
-    }
-    //Function to add total to
-    locations[k].add_total_to_page = function(){
+    };
+
+    //Defines function to add location totals to page
+    //TODO: Move this out of the function somehow so it's not defined every time.
+    locations[k].add_total_to_page = function add_total_to_page(){
       var sold_list = document.getElementById(html_headings[k]);
       var total = document.createElement('li');
       total.textContent = 'Total: ' + this.location_total;
       sold_list.appendChild(total);
-    }
+    };
 
     locations[k].calculate_hourly_cookies();
     locations[k].add_hourly_total_to_page();
