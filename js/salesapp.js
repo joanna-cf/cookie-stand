@@ -27,12 +27,12 @@ function getRandomIntInclusive(min, max){
 }
 
 //Constructor function for Store
-function Stores(name, min_customers, max_customers, avg_cookies, hourly_total, location_total){
+function Stores(name, min_customers, max_customers, avg_cookies, sold_cookies_by_hour, location_total){
   this.name = name;
   this.min_customers = min_customers;
   this.max_customers = max_customers;
   this.avg_cookies = avg_cookies;
-  this.hourly_total = hourly_total;
+  this.sold_cookies_by_hour = sold_cookies_by_hour;
   this.location_total = location_total;
 }
 
@@ -43,8 +43,8 @@ Stores.prototype.calculateHourlyCookies = function (){
     console.log(sold_cookies_raw);
     //Truncation, Cite: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
     var sold_cookies = Math.trunc(sold_cookies_raw);
-    this.hourly_total.push(sold_cookies);
-    this.location_total = this.location_total + this.hourly_total[i];
+    this.sold_cookies_by_hour.push(sold_cookies);
+    this.location_total = this.location_total + this.sold_cookies_by_hour[i];
   }
 };
 
@@ -67,6 +67,10 @@ var locations = [pike, seatac, seattleC, capitol, alki];
 // 4. Connect child // parent.appendChild(child)
 
 console.log(pike.calculateHourlyCookies());
+console.log(seatac.calculateHourlyCookies());
+console.log(seattleC.calculateHourlyCookies());
+console.log(capitol.calculateHourlyCookies());
+console.log(alki.calculateHourlyCookies());
 
 //TABLES
 var table_el = document.getElementById('cookie-table');
@@ -92,6 +96,7 @@ table_el.appendChild(table_head);
 
 //Creates body section of table
 var table_body = document.createElement('tbody');
+
 //Loop to go through different stores
 for(var k = 0; k < locations.length;k++){
   //Creates row in body
@@ -103,15 +108,59 @@ for(var k = 0; k < locations.length;k++){
   row.appendChild(row_beginning);
 
   //Loops to create cells
-  for (var j = 0; j < hours.length; j++){
+  for (var j = 0; j < (hours.length - 1); j++){
     var cells = document.createElement('td');
-    cells.textContent = pike.hourly_total[j]; //change this to array from objects
+    cells.textContent = locations[k].sold_cookies_by_hour[j]; //change this to array from objects
     row.appendChild(cells);
   }
+
+  //Creates end of row with totals in cells
+  var row_totals = document.createElement('td');
+  row_totals.textContent = locations[k].location_total;
+  row.appendChild(row_totals);
+  //Appends each row onto the body
   table_body.appendChild(row);
 }
-
+//Appends body onto table element
 table_el.appendChild(table_body);
+
+//Creates table footer section
+var table_foot = document.createElement('tfoot');
+//Creates the footer row
+var foot_row = document.createElement('tr');
+//Creates the beginning of the footer row
+var foot_beginning = document.createElement('th');
+foot_beginning.textContent = 'Totals:';
+foot_row.appendChild(foot_beginning);
+
+//Creates the cells in footer ==> put this into loop, to loop through time totals
+
+for(var n = 0; n < (hours.length - 1); n++){
+  var foot_cell = document.createElement('td');
+  var hourly_total = 0;
+
+  for(var o = 0; o < locations.length; o++){
+    console.log(locations[o]);
+    hourly_total += locations[o]['sold_cookies_by_hour'][n];
+    foot_cell.textContent = hourly_total;
+    console.log(hourly_total);
+  }
+
+  foot_row.appendChild(foot_cell);
+}
+
+//Creates grand total cell
+var foot_total = document.createElement('td');
+var grand_total = 0;
+for(var p = 0; p < locations.length; p++){
+  grand_total += locations[p].location_total;
+  foot_total.textContent = grand_total;
+}
+foot_row.appendChild(foot_total);
+
+//Appends row onto foot section
+table_foot.appendChild(foot_row);
+table_el.appendChild(table_foot);
 
 
 
@@ -127,7 +176,7 @@ table_el.appendChild(table_body);
 //     console.log(sold_cookies_raw);
 //     //Truncation, Cite: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
 //     var sold_cookies = Math.trunc(sold_cookies_raw);
-//     this.hourly_total.push(sold_cookies);
+//     this.sold_cookies_by_hour.push(sold_cookies);
 //     this.location_total = this.location_total + this.hourly_total[i];
 //   }
 // }
