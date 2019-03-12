@@ -98,18 +98,20 @@ function add_total_to_page(apples){
   sold_list.appendChild(total);
 };
 
-//Function to loop through locations to calculate all of the above!
+//Defines function to loop through locations to calculate all of the above!
 var calculate_by_location = function (){
   for(var k=0; k < locations.length; k++){
-    //Calls function to generate cookies
+    //Uses functions for locations in loop
     locations[k].calculate_hourly_cookies = calculate_hourly_cookies;
     locations[k].add_hourly_total_to_page = add_hourly_total_to_page;
     locations[k].add_total_to_page = add_total_to_page;
 
+    //Calls functions using k index
     locations[k].calculate_hourly_cookies();
     locations[k].add_hourly_total_to_page(k);
     locations[k].add_total_to_page(k);
   }
 }
 
+//Calls function to loop through locations
 calculate_by_location();
