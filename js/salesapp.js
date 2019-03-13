@@ -27,33 +27,7 @@ function getRandomIntInclusive(min, max){
 }
 
 //Potential problem: what if there is one store with different hours? Could take a slice out of an array (take a slice out of a portion of the array). Array.slice(), putting in a start and an end. Would put in 12am-11pm, and then have property on each index of start and end index, so each object would have  particular slice
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Daily Location Total'];
-
-//TABLES SECTION
-//TODO: Could I make this any more dry? How could I get these to be looping.......?
-var table_el = document.getElementById('cookie-table');
-
-function renderHeader(){
-  //Creates table header section
-  var table_head = document.createElement('thead');
-  //Creates header row
-  var head_row = document.createElement('tr');
-
-  //Creates beginning cell of header row
-  var head_row_beginning = document.createElement('th');
-  head_row_beginning.textContent = ''; //might be optional, by default, all elements have empty content
-  head_row.appendChild(head_row_beginning);
-
-  //Loops to create header cells
-  for (var i = 0; i < hours.length; i++){
-    var head_cells = document.createElement('td');
-    head_cells.textContent = hours[i];
-    head_row.appendChild(head_cells);
-  }
-  //Instead of having Daily total in array, can just create another cell here
-  table_head.appendChild(head_row);
-  table_el.appendChild(table_head);
-}
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 //Constructor function for Store
 function Stores(name, min_customers, max_customers, avg_cookies, sold_cookies_by_hour, location_total){
@@ -67,8 +41,19 @@ function Stores(name, min_customers, max_customers, avg_cookies, sold_cookies_by
 
 //Function calcaulates cookies AND location total --> should separate concerns and have the functions separate, and then have one function at the end to list everything based on what you've calculated
 //Need sales per hour function, number of customers per hour function, so you can build a more detailed table later. Don't lose code readability.
+
+// //Separating concern
+// Stores.prototype.calcalateCustomersByHour = function(){
+//   for(var i in hours){
+//     var customersThisHour = getRandomIntInclusive(this.min_customers, this.max_customers);
+//     this.customers.push(customersThisHour);
+//     console.log(i);
+//   }
+// };
+
+// Original function
 Stores.prototype.calculateHourlyCookies = function (){
-  for (var i = 0; i < hours.length; i++){
+  for (var i in hours){
     var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
     var sold_cookies_raw = customers * this.avg_cookies;
     console.log(sold_cookies_raw);
@@ -102,6 +87,7 @@ console.log(seattleC.calculateHourlyCookies());
 console.log(capitol.calculateHourlyCookies());
 console.log(alki.calculateHourlyCookies());
 
+//Function to render row
 Stores.prototype.renderRow = function(){
   var row = document.createElement('tr');
 
@@ -112,7 +98,7 @@ Stores.prototype.renderRow = function(){
 
   //Loops to create cells
   //Take the final cell out of the array, so we don't have to do hour.length. Make the last cell out of the for loop with a different name. that way we can push more hours into the array if needed.
-  for (var j = 0; j < (hours.length - 1); j++){
+  for (var j in hours){
     var cells = document.createElement('td');
     cells.textContent = this.sold_cookies_by_hour[j];
     row.appendChild(cells);
@@ -126,8 +112,37 @@ Stores.prototype.renderRow = function(){
   table_body.appendChild(row);
 };
 
+//TABLES SECTION
 //Creates body section of table
 var table_body = document.createElement('tbody');
+
+//TODO: Could I make this any more dry? How could I get these to be looping.......?
+var table_el = document.getElementById('cookie-table');
+
+function renderHeader(){
+  //Creates table header section
+  var table_head = document.createElement('thead');
+  //Creates header row
+  var head_row = document.createElement('tr');
+
+  //Creates beginning cell of header row
+  var head_row_beginning = document.createElement('th');
+  head_row.appendChild(head_row_beginning);
+
+  //Loops to create header cells
+  for (var i in hours){
+    var head_cells = document.createElement('td');
+    head_cells.textContent = hours[i];
+    head_row.appendChild(head_cells);
+  }
+  //Instead of having Daily total in array, can just create another cell here
+  var headEndCell = document.createElement('td');
+  headEndCell.textContent = 'Daily Location Total';
+  head_row.appendChild(headEndCell);
+
+  table_head.appendChild(head_row);
+  table_el.appendChild(table_head);
+}
 
 //Appends body onto table element
 table_el.appendChild(table_body);
@@ -145,25 +160,16 @@ function renderFooter(){
 
   //Creates the cells in footer ==> put this into loop, to loop through time totals
 
-  for(var n = 0; n < (hours.length - 1); n++){ //For every hour
+  for(var n in hours){ //For every hour
     var foot_cell = document.createElement('td');
     var hourly_total = 0;
 
-    for(var o = 0; o < locations.length; o++){ //Add all the totals
+    for(var o in locations){ //Add all the totals
       hourly_total += locations[o]['sold_cookies_by_hour'][n];
       foot_cell.textContent = hourly_total;
     }
     foot_row.appendChild(foot_cell);
   }
-
-  //Creates grand total cell in footer
-  var foot_total = document.createElement('td');
-  var grand_total = 0;
-  for(var p = 0; p < locations.length; p++){
-    grand_total += locations[p].location_total;
-    foot_total.textContent = grand_total;
-  }
-  foot_row.appendChild(foot_total);
 
   //Appends row onto foot section
   table_foot.appendChild(foot_row);
@@ -172,21 +178,27 @@ function renderFooter(){
 
 //Calls all the functions here, including instantiating objects
 renderHeader();
-//Use for loop to call each store according to array
+//Uses for loop to call each store according to locations array
 pike.renderRow();
-seatac.renderRow();
-seattleC.renderRow();
-capitol.renderRow();
-alki.renderRow();
+for(var i in locations){
+  locations[i].renderRow();
+}
 renderFooter();
 
 //for(var i in storesArray) === for (var i = 0; i <storesArray.length; i++) !!!!!
 
-var first_div = document.getElementById('first');
-var eventHandler = function(formSubmit){
-  formSubmit.preventDefault();
-  console.log(formSubmit);
-};
-first_div.addEventListener('click', eventHandler);
+// CODE DEMO
+// var first_div = document.getElementById('first');
+// var eventHandler = function(formSubmit){
+//   formSubmit.preventDefault();
+//   console.log(formSubmit);
+// };
+// first_div.addEventListener('click', eventHandler);
 
-var username = formSubmit.target.username.value;
+// var username = formSubmit.target.username.value;
+
+// storeTable.innerHTML = '';
+// renderTable();
+// cookieStores.push(newStore);
+
+//
