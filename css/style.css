@@ -1,0 +1,26 @@
+* {
+  color: #870C35;
+  color: #F3DBD2 ;
+  color: #EFC0A0;
+}
+
+body {
+  margin: 20px;
+  border: 2px dotted black;
+  padding: 20px;
+
+}
+
+h1 {
+  color: #870C35;
+}
+
+img {
+  width: 400px;
+  margin: auto;
+}
+
+a {
+  display: inline-block;
+  color: #EFC0A0;
+}
