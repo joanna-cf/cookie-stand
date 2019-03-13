@@ -1,26 +1,64 @@
-* {
-  color: #870C35;
-  color: #F3DBD2 ;
-  color: #EFC0A0;
-}
+/*
+Title: Quicksand Google font
+Body: Lato Google font
+
+*/
 
 body {
   margin: 20px;
   border: 2px dotted black;
   padding: 20px;
+  font-family: 'Lato', Helvetica, sans-serif;
+  background-color: white;
+  color: #EFC0A0;
+  text-align: center
 
 }
 
 h1 {
+  font-family: 'Yellowtail', serif;
+  font-size: 6em;
   color: #870C35;
+  text-shadow: 3px 3px 5px black;
+  z-index: 10;
+  margin: auto;
 }
 
+#cookie-table {
+  border: 1px;
+}
+
+/*Cite: Opacity https://www.w3schools.com/css/css_image_transparency.asp */
 img {
-  width: 400px;
-  margin: auto;
+  opacity: 0.8;
+  width: 200px;
+  z-index: 1;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
   display: inline-block;
-  color: #EFC0A0;
+  color: #870C35;
+  padding: 50px;
 }
+
+#slogan {
+  color:#870C35;
+  margin: 50px;
+  font-family: 'Yellowtail', serif;
+}
+
+table {
+  width: 600px;
+  text-align: center;
+  border: 5px;
+}
+
+p {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
