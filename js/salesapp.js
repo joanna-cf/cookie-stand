@@ -26,6 +26,7 @@ function getRandomIntInclusive(min, max){
   return Math.floor(Math.random()*(max - min + 1)) + min;
 }
 
+//Potential problem: what if there is one store with different hours? Could take a slice out of an array (take a slice out of a portion of the array). Array.slice(), putting in a start and an end. Would put in 12am-11pm, and then have property on each index of start and end index, so each object would have  particular slice
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Daily Location Total'];
 
 //TABLES SECTION
@@ -40,7 +41,7 @@ function renderHeader(){
 
   //Creates beginning cell of header row
   var head_row_beginning = document.createElement('th');
-  head_row_beginning.textContent = '';
+  head_row_beginning.textContent = ''; //might be optional, by default, all elements have empty content
   head_row.appendChild(head_row_beginning);
 
   //Loops to create header cells
@@ -49,6 +50,7 @@ function renderHeader(){
     head_cells.textContent = hours[i];
     head_row.appendChild(head_cells);
   }
+  //Instead of having Daily total in array, can just create another cell here
   table_head.appendChild(head_row);
   table_el.appendChild(table_head);
 }
@@ -63,6 +65,8 @@ function Stores(name, min_customers, max_customers, avg_cookies, sold_cookies_by
   this.location_total = location_total;
 }
 
+//Function calcaulates cookies AND location total --> should separate concerns and have the functions separate, and then have one function at the end to list everything based on what you've calculated
+//Need sales per hour function, number of customers per hour function, so you can build a more detailed table later. Don't lose code readability.
 Stores.prototype.calculateHourlyCookies = function (){
   for (var i = 0; i < hours.length; i++){
     var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
@@ -83,6 +87,7 @@ var capitol = new Stores('Capitol Hill', 20, 38, 62.3, [], 0);
 var alki = new Stores('Alki', 2, 16, 64.6, [], 0);
 
 //Array with hours, headings, and objects
+//Make this an empty array, and once we instantiate a new object, push it into this array!
 var locations = [pike, seatac, seattleC, capitol, alki];
 
 //Make a table
@@ -106,6 +111,7 @@ Stores.prototype.renderRow = function(){
   row.appendChild(row_beginning);
 
   //Loops to create cells
+  //Take the final cell out of the array, so we don't have to do hour.length. Make the last cell out of the for loop with a different name. that way we can push more hours into the array if needed.
   for (var j = 0; j < (hours.length - 1); j++){
     var cells = document.createElement('td');
     cells.textContent = this.sold_cookies_by_hour[j];
@@ -126,6 +132,7 @@ var table_body = document.createElement('tbody');
 //Appends body onto table element
 table_el.appendChild(table_body);
 
+//Function to create table footer
 function renderFooter(){
   //Creates table footer section
   var table_foot = document.createElement('tfoot');
@@ -138,18 +145,18 @@ function renderFooter(){
 
   //Creates the cells in footer ==> put this into loop, to loop through time totals
 
-  for(var n = 0; n < (hours.length - 1); n++){
+  for(var n = 0; n < (hours.length - 1); n++){ //For every hour
     var foot_cell = document.createElement('td');
     var hourly_total = 0;
 
-    for(var o = 0; o < locations.length; o++){
+    for(var o = 0; o < locations.length; o++){ //Add all the totals
       hourly_total += locations[o]['sold_cookies_by_hour'][n];
       foot_cell.textContent = hourly_total;
     }
     foot_row.appendChild(foot_cell);
   }
 
-  //Creates grand total cell
+  //Creates grand total cell in footer
   var foot_total = document.createElement('td');
   var grand_total = 0;
   for(var p = 0; p < locations.length; p++){
@@ -163,11 +170,23 @@ function renderFooter(){
   table_el.appendChild(table_foot);
 }
 
-//Calls all the functions to create table
+//Calls all the functions here, including instantiating objects
 renderHeader();
+//Use for loop to call each store according to array
 pike.renderRow();
 seatac.renderRow();
 seattleC.renderRow();
 capitol.renderRow();
 alki.renderRow();
 renderFooter();
+
+//for(var i in storesArray) === for (var i = 0; i <storesArray.length; i++) !!!!!
+
+var first_div = document.getElementById('first');
+var eventHandler = function(formSubmit){
+  formSubmit.preventDefault();
+  console.log(formSubmit);
+};
+first_div.addEventListener('click', eventHandler);
+
+var username = formSubmit.target.username.value;

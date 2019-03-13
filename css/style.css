@@ -2,6 +2,16 @@
 Title: Quicksand Google font
 Body: Lato Google font
 
+TODO: Image
+Centering image
+
+TODO: Table
+Rounded corners on table
+Alternating colored lines
+Padding and spacing
+
+TODO: Nav bar
+Make heading the home button
 */
 
 body {
@@ -34,8 +44,7 @@ img {
   width: 200px;
   z-index: 1;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 a {
@@ -58,7 +67,11 @@ table {
 
 p {
   width: 60%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
+
+table {
+  border: 1px solid black;
+}
+
 
