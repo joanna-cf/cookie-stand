@@ -201,4 +201,28 @@ renderFooter();
 // renderTable();
 // cookieStores.push(newStore);
 
-//
+//PLANNING:
+//create event, get element by ID
+//function of what we want to do when this even happens
+//   I want this to collect the data for the new object
+//   a
+//add event listener
+
+//what I want it to do
+//Collect information for new instantiated object
+//push object to existing location array
+
+var storesForm = document.getElementById('locationForm');
+
+function submitForm(event){
+  event.preventDefault();
+  var newStoreName = event.target.storeName.value;
+  var newMinCust = event.target.minCust.value;
+  var newMaxCust = event.target.maxCust.value;
+  var newAvg = event.target.avgCookie.value;
+  // console.log (newStoreName, newMinCust, newMaxCust, newAvg);
+  var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg, [], 0);
+  console.log(newStore);
+}
+
+storesForm.addEventListener('submit', submitForm);
