@@ -26,54 +26,58 @@ function getRandomIntInclusive(min, max){
   return Math.floor(Math.random()*(max - min + 1)) + min;
 }
 
-//Potential problem: what if there is one store with different hours? Could take a slice out of an array (take a slice out of a portion of the array). Array.slice(), putting in a start and an end. Would put in 12am-11pm, and then have property on each index of start and end index, so each object would have  particular slice
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
+//Array with hours, headings, and objects
+var locations = [];
+
+//Using constructor function for 5 stores
+var pike = new Stores('First and Pike', 23, 65, 6.5, [], 0, [],0);
+var seatac = new Stores('Seatac Airport', 3, 24, 1.2, [], 0, [], 0);
+var seattleC = new Stores('Seattle Center', 11, 38, 3.7, [], 0, [], 0);
+var capitol = new Stores('Capitol Hill', 20, 38, 62.3, [], 0, [], 0);
+var alki = new Stores('Alki', 2, 16, 64.6, [], 0, [], 0);
+
+locations.push(pike, seatac, seattleC, capitol, alki);
+
 //Constructor function for Store
-function Stores(name, min_customers, max_customers, avg_cookies, sold_cookies_by_hour, location_total){
+function Stores(name, min_customers, max_customers, avg_cookies, customersByHour, totalCustomers, sold_cookies_by_hour, location_total){
   this.name = name;
   this.min_customers = min_customers;
   this.max_customers = max_customers;
   this.avg_cookies = avg_cookies;
+  this.customersByHour = customersByHour;
+  this.totalCustomers = totalCustomers;
   this.sold_cookies_by_hour = sold_cookies_by_hour;
   this.location_total = location_total;
 }
 
-//Function calcaulates cookies AND location total --> should separate concerns and have the functions separate, and then have one function at the end to list everything based on what you've calculated
-//Need sales per hour function, number of customers per hour function, so you can build a more detailed table later. Don't lose code readability.
-
-// //Separating concern
-// Stores.prototype.calcalateCustomersByHour = function(){
-//   for(var i in hours){
-//     var customersThisHour = getRandomIntInclusive(this.min_customers, this.max_customers);
-//     this.customers.push(customersThisHour);
-//     console.log(i);
-//   }
-// };
-
-// Original function
-Stores.prototype.calculateHourlyCookies = function (){
-  for (var i in hours){
-    var customers = getRandomIntInclusive(this.min_customers, this.max_customers);
-    var sold_cookies_raw = customers * this.avg_cookies;
-    console.log(sold_cookies_raw);
-    //Truncation, Cite: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
-    var sold_cookies = Math.trunc(sold_cookies_raw);
-    this.sold_cookies_by_hour.push(sold_cookies);
-    this.location_total = this.location_total + this.sold_cookies_by_hour[i];
+//Function to calclulate customers by hour, stored in an array in object
+Stores.prototype.calculateCustomersByHour = function(){
+  for(var i in hours){
+    var customersThisHour = getRandomIntInclusive(this.min_customers, this.max_customers);
+    this.customersByHour.push(customersThisHour);
+    this.totalCustomers = this.totalCustomers + this.customersByHour[i];
   }
 };
 
-//Using constructor function for 5 stores
-var pike = new Stores('First and Pike', 23, 65, 6.5, [], 0);
-var seatac = new Stores('Seatac Airport', 3, 24, 1.2, [], 0);
-var seattleC = new Stores('Seattle Center', 11, 38, 3.7, [], 0);
-var capitol = new Stores('Capitol Hill', 20, 38, 62.3, [], 0);
-var alki = new Stores('Alki', 2, 16, 64.6, [], 0);
+//Function to calculate cookies sold by hour, stored in an array in object
+Stores.prototype.calculateCookiesByHour = function(){
+  for(var i in hours){
+    var sold_cookies_raw = this.customersByHour[i] * this.avg_cookies;
+    //Truncation, Cite: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
+    var sold_cookies = Math.trunc(sold_cookies_raw);
+    this.sold_cookies_by_hour.push(sold_cookies);
+    console.log(this.name + ' sold ' + sold_cookies + ' cookies at ' + hours[i]);
+  }
+};
 
-//Array with hours, headings, and objects
-//Make this an empty array, and once we instantiate a new object, push it into this array!
-var locations = [pike, seatac, seattleC, capitol, alki];
+//Function to calculate total for this location, stored as variable in object
+Stores.prototype.calculateLocationTotal = function(){
+  for(var i in hours){
+    this.location_total = this.location_total + this.sold_cookies_by_hour[i];
+  }
+};
 
 //Make a table
 // 1. Get reference to parent // section
@@ -81,48 +85,11 @@ var locations = [pike, seatac, seattleC, capitol, alki];
 // 3. Give it content //textContent
 // 4. Connect child // parent.appendChild(child)
 
-console.log(pike.calculateHourlyCookies());
-console.log(seatac.calculateHourlyCookies());
-console.log(seattleC.calculateHourlyCookies());
-console.log(capitol.calculateHourlyCookies());
-console.log(alki.calculateHourlyCookies());
-
-//Function to render row
-Stores.prototype.renderRow = function(){
-  var row = document.createElement('tr');
-
-  //Creates beginning cell of row
-  var row_beginning = document.createElement('th');
-  row_beginning.textContent = this.name;
-  row.appendChild(row_beginning);
-
-  //Loops to create cells
-  //Take the final cell out of the array, so we don't have to do hour.length. Make the last cell out of the for loop with a different name. that way we can push more hours into the array if needed.
-  for (var j in hours){
-    var cells = document.createElement('td');
-    cells.textContent = this.sold_cookies_by_hour[j];
-    row.appendChild(cells);
-  }
-
-  //Creates end of row with totals in cells
-  var row_totals = document.createElement('td');
-  row_totals.textContent = this.location_total;
-  row.appendChild(row_totals);
-  //Appends each row onto the body
-  table_body.appendChild(row);
-};
-
-//TABLES SECTION
-//Creates body section of table
-var table_body = document.createElement('tbody');
-
-//TODO: Could I make this any more dry? How could I get these to be looping.......?
 var table_el = document.getElementById('cookie-table');
 
+//Function to render Header
 function renderHeader(){
-  //Creates table header section
   var table_head = document.createElement('thead');
-  //Creates header row
   var head_row = document.createElement('tr');
 
   //Creates beginning cell of header row
@@ -135,7 +102,8 @@ function renderHeader(){
     head_cells.textContent = hours[i];
     head_row.appendChild(head_cells);
   }
-  //Instead of having Daily total in array, can just create another cell here
+
+  //Creates ending cell of 'Daily Location Total'
   var headEndCell = document.createElement('td');
   headEndCell.textContent = 'Daily Location Total';
   head_row.appendChild(headEndCell);
@@ -144,8 +112,30 @@ function renderHeader(){
   table_el.appendChild(table_head);
 }
 
-//Appends body onto table element
-table_el.appendChild(table_body);
+//Function to render rows
+Stores.prototype.renderRow = function(){
+  var table_body = document.createElement('tbody');
+  var row = document.createElement('tr');
+
+  //Creates beginning cell of row
+  var row_beginning = document.createElement('th');
+  row_beginning.textContent = this.name;
+  row.appendChild(row_beginning);
+
+  for (var j in hours){
+    var cells = document.createElement('td');
+    cells.textContent = this.sold_cookies_by_hour[j];
+    row.appendChild(cells);
+  }
+
+  //Creates end of row with totals in cells
+  var row_totals = document.createElement('td');
+  row_totals.textContent = this.location_total;
+  row.appendChild(row_totals);
+  //Appends each row onto the body
+  table_body.appendChild(row);
+  table_el.appendChild(table_body);
+};
 
 //Function to create table footer
 function renderFooter(){
@@ -160,16 +150,25 @@ function renderFooter(){
 
   //Creates the cells in footer ==> put this into loop, to loop through time totals
 
-  for(var n in hours){ //For every hour
+  for(var i in hours){ //For every hour
     var foot_cell = document.createElement('td');
     var hourly_total = 0;
 
-    for(var o in locations){ //Add all the totals
-      hourly_total += locations[o]['sold_cookies_by_hour'][n];
+    for(var j in locations){ //Add all the totals
+      hourly_total += locations[j]['sold_cookies_by_hour'][i];
       foot_cell.textContent = hourly_total;
     }
     foot_row.appendChild(foot_cell);
   }
+
+  //Creates grand total cell in footer
+  var foot_total = document.createElement('td');
+  var grand_total = 0;
+  for(var m in locations){
+    grand_total += locations[m].location_total;
+    foot_total.textContent = grand_total;
+  }
+  foot_row.appendChild(foot_total);
 
   //Appends row onto foot section
   table_foot.appendChild(foot_row);
@@ -177,13 +176,23 @@ function renderFooter(){
 }
 
 //Calls all the functions here, including instantiating objects
-renderHeader();
-//Uses for loop to call each store according to locations array
-pike.renderRow();
-for(var i in locations){
-  locations[i].renderRow();
+Stores.prototype.render = function(){
+  this.calculateCustomersByHour();
+  this.calculateCookiesByHour();
+  this.calculateLocationTotal();
+  this.renderRow();
+};
+
+function renderAll (){
+  renderHeader();
+  // renderBody();
+  for(var j in locations){
+    locations[j].render();
+  }
+  renderFooter();
 }
-renderFooter();
+
+renderAll();
 
 //for(var i in storesArray) === for (var i = 0; i <storesArray.length; i++) !!!!!
 
@@ -212,6 +221,7 @@ renderFooter();
 //Collect information for new instantiated object
 //push object to existing location array
 
+//
 var storesForm = document.getElementById('locationForm');
 
 function submitForm(event){
@@ -220,9 +230,12 @@ function submitForm(event){
   var newMinCust = event.target.minCust.value;
   var newMaxCust = event.target.maxCust.value;
   var newAvg = event.target.avgCookie.value;
-  // console.log (newStoreName, newMinCust, newMaxCust, newAvg);
-  var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg, [], 0);
-  console.log(newStore);
+  var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg, [], 0, [], 0);
+  newStore.render();
+  locations.push(newStore);
+  console.log(locations);
+  table_el.innerHTML = '';
+  renderAll();
 }
 
 storesForm.addEventListener('submit', submitForm);
