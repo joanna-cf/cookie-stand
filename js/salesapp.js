@@ -32,24 +32,24 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 var locations = [];
 
 //Using constructor function for 5 stores
-var pike = new Stores('First and Pike', 23, 65, 6.5, [], 0, [],0);
-var seatac = new Stores('Seatac Airport', 3, 24, 1.2, [], 0, [], 0);
-var seattleC = new Stores('Seattle Center', 11, 38, 3.7, [], 0, [], 0);
-var capitol = new Stores('Capitol Hill', 20, 38, 62.3, [], 0, [], 0);
-var alki = new Stores('Alki', 2, 16, 64.6, [], 0, [], 0);
+var pike = new Stores('First and Pike', 23, 65, 6.5);
+var seatac = new Stores('Seatac Airport', 3, 24, 1.2);
+var seattleC = new Stores('Seattle Center', 11, 38, 3.7);
+var capitol = new Stores('Capitol Hill', 20, 38, 62.3);
+var alki = new Stores('Alki', 2, 16, 64.6);
 
 locations.push(pike, seatac, seattleC, capitol, alki);
 
 //Constructor function for Store
-function Stores(name, min_customers, max_customers, avg_cookies, customersByHour, totalCustomers, sold_cookies_by_hour, location_total){
+function Stores(name, min_customers, max_customers, avg_cookies){
   this.name = name;
   this.min_customers = min_customers;
   this.max_customers = max_customers;
   this.avg_cookies = avg_cookies;
-  this.customersByHour = customersByHour;
-  this.totalCustomers = totalCustomers;
-  this.sold_cookies_by_hour = sold_cookies_by_hour;
-  this.location_total = location_total;
+  this.customersByHour = [];
+  this.totalCustomers = 0;
+  this.sold_cookies_by_hour = [];
+  this.location_total = 0;
 }
 
 //Function to calclulate customers by hour, stored in an array in object
@@ -182,6 +182,7 @@ Stores.prototype.render = function(){
   this.renderRow();
 };
 
+//Function to render everything onto page
 function renderAll (){
   renderHeader();
   // renderBody();
@@ -194,7 +195,7 @@ function renderAll (){
 renderAll();
 
 
-// CODE DEMO
+// CODE DEMO CLASS 8
 // var first_div = document.getElementById('first');
 // var eventHandler = function(formSubmit){
 //   formSubmit.preventDefault();
@@ -212,7 +213,6 @@ renderAll();
 //create event, get element by ID
 //function of what we want to do when this even happens
 //   I want this to collect the data for the new object
-//   a
 //add event listener
 //WHAT I WANT IT TO DO
 //Collect information for new instantiated object
@@ -228,7 +228,7 @@ function submitForm(event){
   var newMinCust = event.target.minCust.value;
   var newMaxCust = event.target.maxCust.value;
   var newAvg = event.target.avgCookie.value;
-  var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg, [], 0, [], 0);
+  var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg);
   //Runs all the functions necessary for properties in object
   newStore.render();
   //Pushes to existing array of all objects
@@ -238,7 +238,7 @@ function submitForm(event){
   renderAll();
 }
 
-//Event
+//Event Listener
 storesForm.addEventListener('submit', submitForm);
 
 //TODO:

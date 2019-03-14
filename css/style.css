@@ -1,6 +1,7 @@
 /*
 Title: Quicksand Google font
 Body: Lato Google font
+TODO: Make store names all caps?
 */
 
 body {
@@ -86,6 +87,7 @@ th {
   letter-spacing: 0.1em; 
   padding: 10px;
   height: 50px;
+  text-transform: capitalize;
 }
 
 td {
@@ -126,7 +128,7 @@ label {
 input {
   float: left;
   position: relative;
-  left: 20px;
+  left: 5px;
   border-radius: 5px;
   margin: 10px;
 }
@@ -146,7 +148,7 @@ input:focus {
   background-color: #EFC0A030;
   color: #870C35;
   position: relative;
-  left: -50px;
+  left: -55px;
   margin: 20px;
   padding: 5px 20px;
 }
