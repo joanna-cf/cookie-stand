@@ -7,7 +7,10 @@ TODO: Make store names all caps?
 @import url('https://fonts.googleapis.com/css?family=Lato|Yellowtail');
 
 *{
+  box-sizing: border-box;
   font-family: 'Lato', Helvetica, sans-serif;
+  color: #EFC0A0;
+  text-align: center
 }
 
 header {
@@ -19,7 +22,11 @@ header {
 }
 
 h1 {
+  font-family: 'Yellowtail', serif;
   font-size: 6em;
+  font-weight: bold;
+  color: #870C35;
+  text-shadow: 3px 3px 5px black;
   text-align: center;
 }
 
@@ -33,6 +40,8 @@ header > img {
 
 header > h2 {
   text-align: center;
+  font-size: 1.2em;
+  font-family: 'Lato', Helvetica, sans-serif;
 }
 
 nav {
@@ -51,23 +60,125 @@ nav > ul {
 
 nav > ul > li { /* Aspect ratio box to get the links to scale */
   float: left;
+  margin-right: 80px;
   margin-top: 12.5px;
 }
 
+nav > ul > li > a {
+  font-family: 'Lato', Helvetica, sans-serif;
+  color: #870C35;
+}
+
 main {
-  width: 960px;
+  width: 960x;
   margin: auto;
   margin-bottom: 30px;
 }
 
-main > p {
+main > ul > li > p {
   margin: auto;
   margin-bottom: 15px;
 }
 
+main > table {
+  text-align: center;
+  border: 1px solid black;
+  margin: auto;
+  color: grey;
+  border-collapse: collapse;
+}
+
+thead {
+  color: #EFC0A0;
+}
+
+tbody {
+  border: 1px solid black;
+  background-color: #EFC0A030;
+}
+
+tbody:hover{
+  background-color: #EFC0A0;
+}
+
+th {
+  color:#870C35; 
+  letter-spacing: 0.1em; 
+  padding: 10px;
+  height: 50px;
+  text-transform: capitalize;
+}
+
+td {
+  padding: 10px;
+}
+
+tfoot {
+  color: #EFC0A0;
+}
+
+#locationTitle {
+  letter-spacing: 0.1em;
+}
+
+
+main > form > fieldset {
+  border-radius: 5px;
+  width: 450px;
+}
+
+main > form > fieldset > legend {
+  font-weight: bold;
+  color: #870C35;
+  background-color: #EFC0A030;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+main > form > fieldset > label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 200px;
+  text-align: right;
+  padding: 10px;
+}
+
+main > form > fieldset > input {
+  float: left;
+  position: relative;
+  left: 5px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+main > form > fieldset > input:focus {
+  background-color: lightgrey;
+}
+
+#locationForm {
+  margin: auto;
+  padding: 40px;
+  display: block;
+  width: 480px;
+}
+
+#doneButton {
+  background-color: #EFC0A030;
+  color: #870C35;
+  position: relative;
+  left: -55px;
+  margin: 20px;
+  padding: 5px 20px;
+}
+
+#doneButton:hover {
+  background-color: #EFC0A0;
+}
+
 footer {
   height: 160px;
-  width: 960px;
+  width: 960x;
   margin: auto;
   overflow: hidden;
 }
@@ -75,17 +186,21 @@ footer {
 footer > h2 {
   text-align: center;
   margin-bottom: 30px;
+  color:#870C35;
+  font-size: 1.5em;
+  font-family: 'Yellowtail', serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
 }
 
 footer > ul > li {
   float: left; 
+  height: 120px;
 }
 
-
-
-
-
-
+footer > ul > li > img {
+  height: 40px;
+}
 
 
 

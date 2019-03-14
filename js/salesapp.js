@@ -194,21 +194,6 @@ function renderAll (){
 
 renderAll();
 
-
-// CODE DEMO CLASS 8
-// var first_div = document.getElementById('first');
-// var eventHandler = function(formSubmit){
-//   formSubmit.preventDefault();
-//   console.log(formSubmit);
-// };
-// first_div.addEventListener('click', eventHandler);
-
-// var username = formSubmit.target.username.value;
-
-// storeTable.innerHTML = '';
-// renderTable();
-// cookieStores.push(newStore);
-
 //PLANNING:
 //create event, get element by ID
 //function of what we want to do when this even happens
