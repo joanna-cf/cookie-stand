@@ -149,7 +149,6 @@ function renderFooter(){
   foot_row.appendChild(foot_beginning);
 
   //Creates the cells in footer ==> put this into loop, to loop through time totals
-
   for(var i in hours){ //For every hour
     var foot_cell = document.createElement('td');
     var hourly_total = 0;
@@ -175,7 +174,7 @@ function renderFooter(){
   table_el.appendChild(table_foot);
 }
 
-//Calls all the functions here, including instantiating objects
+//Function to call all the functions here, including instantiating objects
 Stores.prototype.render = function(){
   this.calculateCustomersByHour();
   this.calculateCookiesByHour();
@@ -194,7 +193,6 @@ function renderAll (){
 
 renderAll();
 
-//for(var i in storesArray) === for (var i = 0; i <storesArray.length; i++) !!!!!
 
 // CODE DEMO
 // var first_div = document.getElementById('first');
@@ -216,14 +214,14 @@ renderAll();
 //   I want this to collect the data for the new object
 //   a
 //add event listener
-
-//what I want it to do
+//WHAT I WANT IT TO DO
 //Collect information for new instantiated object
 //push object to existing location array
 
-//
+//Gets the form by ID
 var storesForm = document.getElementById('locationForm');
 
+//Event handler that performs the function
 function submitForm(event){
   event.preventDefault();
   var newStoreName = event.target.storeName.value;
@@ -231,11 +229,17 @@ function submitForm(event){
   var newMaxCust = event.target.maxCust.value;
   var newAvg = event.target.avgCookie.value;
   var newStore = new Stores(newStoreName, newMinCust, newMaxCust, newAvg, [], 0, [], 0);
+  //Runs all the functions necessary for properties in object
   newStore.render();
+  //Pushes to existing array of all objects
   locations.push(newStore);
   console.log(locations);
   table_el.innerHTML = '';
   renderAll();
 }
 
+//Event
 storesForm.addEventListener('submit', submitForm);
+
+//TODO:
+//Error correction on input

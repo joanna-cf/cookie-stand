@@ -9,33 +9,36 @@
   <title>Sales Page</title>
 </head>
 <body>
-    <h2>Cookie Sales</h2>
-    
-    <a href="index.html">Home</a>
-    <a href="">About</a>
-    <a href="">Prices</a>
-    <a href="">Contact Us</a>
-    <table id="cookie-table"></table>
+  <h1>Salmookies</h1>
+  <a href="index.html"><img src="images/salmon.png"></a>
+  <h2>The Original Salmon Cookies</h2>
 
-    <form id="locationForm">
-      <fieldset>
-        <legend>Enter A New Store</legend>
-        <label>Store name
-          <input type="text" name="storeName">
-        </label>
-        <label>Minimum Customers
-          <input type="text" name="minCust">
-        </label>
-        <label>Maximum Customers
-          <input type="text" name="maxCust">
-        </label>
-        <label>Average Cookie Sold Per Customer
-          <input type="text" name="avgCookie">
-        </label>
-        <input type="submit" value="Done">
-      </fieldset>
-    </form>
+  <ul id="nav">
+    <li><a href="">About</a></li>
+    <li><a href="">Prices</a></li>
+    <li><a href="">Location Statistics</a></li>
+    <li><a href="">Contact Us</a></li>
+  </ul>
 
-    <script src="js/salesapp.js"></script>
+  <h2 id="locationTitle">Cookie Sales By Location</h2>
+  
+  <table id="cookie-table"></table>
+
+  <form id="locationForm">
+    <fieldset>
+      <legend>Enter New Location Information</legend>
+      <label>Store name</label>
+      <input type="text" name="storeName">
+      <label>Minimum Customers</label>
+      <input type="text" name="minCust">
+      <label>Maximum Customers</label>
+      <input type="text" name="maxCust">
+      <label>Average Cookie Sold Per Customer</label>
+      <input type="text" name="avgCookie">
+      <input type="submit" id="doneButton" value="Done">
+    </fieldset>
+  </form>
+
+  <script src="js/salesapp.js"></script>
 </body>
 </html>
