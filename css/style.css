@@ -1,28 +1,17 @@
 /*
 Title: Quicksand Google font
 Body: Lato Google font
-
-TODO: Image
-Centering image
-
-TODO: Table
-Rounded corners on table
-Alternating colored lines
-Padding and spacing
-
-TODO: Nav bar
-Make heading the home button
+TODO: Make store names all caps?
 */
 
 body {
   margin: 20px;
-  border: 2px dotted black;
+  /* border: 2px dotted black; */
   padding: 20px;
   font-family: 'Lato', Helvetica, sans-serif;
   background-color: white;
   color: #EFC0A0;
   text-align: center
-
 }
 
 h1 {
@@ -34,10 +23,6 @@ h1 {
   margin: auto;
 }
 
-#cookie-table {
-  border: 1px;
-}
-
 /*Cite: Opacity https://www.w3schools.com/css/css_image_transparency.asp */
 img {
   opacity: 0.8;
@@ -47,11 +32,26 @@ img {
   margin: auto;
 }
 
-a {
-  display: inline-block;
-  color: #870C35;
-  padding: 50px;
+#nav {
+  background-color: #EFC0A030;
+  margin: 40px;
+  padding: 10px;
 }
+
+li {
+  display: inline;
+  color: #870C35;
+  padding: 30px;
+}
+
+
+p {
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  letter-spacing: 0.05em;
+}
+
 
 #slogan {
   color:#870C35;
@@ -59,19 +59,100 @@ a {
   font-family: 'Yellowtail', serif;
 }
 
-table {
-  width: 600px;
+/* Styling the Table */
+
+#cookie-table {
   text-align: center;
-  border: 5px;
-}
-
-p {
-  width: 60%;
-  margin: auto;
-}
-
-table {
   border: 1px solid black;
+  margin: auto;
+  color: grey;
+  border-collapse: collapse;
 }
 
+thead {
+  color: #EFC0A0;
+}
 
+tbody {
+  border: 1px solid black;
+  background-color: #EFC0A030;
+}
+
+tbody:hover{
+  background-color: #EFC0A0;
+}
+
+th {
+  color:#870C35; 
+  letter-spacing: 0.1em; 
+  padding: 10px;
+  height: 50px;
+  text-transform: capitalize;
+}
+
+td {
+  padding: 10px;
+}
+
+tfoot {
+  color: #EFC0A0;
+}
+
+#locationTitle {
+  letter-spacing: 0.1em;
+}
+
+/* Styling the form */
+
+fieldset {
+  border-radius: 5px;
+}
+
+legend {
+  font-weight: bold;
+  color: #870C35;
+  background-color: #EFC0A030;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+label {
+  /* display: block; */
+  float: left;
+  clear: left;
+  width: 200px;
+  text-align: right;
+  padding: 10px;
+}
+
+input {
+  float: left;
+  position: relative;
+  left: 5px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+input:focus {
+  background-color: lightgrey;
+}
+
+#locationForm {
+  margin: auto;
+  padding: 40px;
+  display: block;
+  width: 480px;
+}
+
+#doneButton {
+  background-color: #EFC0A030;
+  color: #870C35;
+  position: relative;
+  left: -55px;
+  margin: 20px;
+  padding: 5px 20px;
+}
+
+#doneButton:hover {
+  background-color: #EFC0A0;
+}
