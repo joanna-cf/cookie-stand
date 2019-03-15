@@ -225,6 +225,3 @@ function submitForm(event){
 
 //Event Listener
 storesForm.addEventListener('submit', submitForm);
-
-//TODO:
-//Error correction on input

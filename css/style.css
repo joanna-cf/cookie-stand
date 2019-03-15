@@ -1,7 +1,7 @@
 /*
 Title: Yellowtail Google font
 Body: Lato Google font
-TODO: Make store names all caps?
+TODO: Be able to scale page to window size
 */
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Yellowtail');
@@ -165,6 +165,7 @@ main > form > fieldset > input {
   /* left: 5px; */
   border-radius: 5px;
   margin: 10px;
+  color: black;
 }
 
 main > form > fieldset > input:focus {

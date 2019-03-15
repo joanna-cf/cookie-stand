@@ -31,13 +31,13 @@
       <fieldset>
         <legend>Enter New Location Information</legend>
         <label>Store name</label>
-        <input type="text" name="storeName">
+        <input type="text" name="storeName" required>
         <label>Minimum Customers</label>
-        <input type="text" name="minCust">
+        <input type="number" name="minCust" required>
         <label>Maximum Customers</label>
-        <input type="text" name="maxCust">
+        <input type="number" name="maxCust" required>
         <label>Average Cookie Sold Per Customer</label>
-        <input type="text" name="avgCookie">
+        <input type="number" name="avgCookie" required>
         <input type="submit" id="doneButton" value="Done">
       </fieldset>
     </form>
