@@ -1,5 +1,6 @@
 'use strict';
 
+//TODO: add a mouse interaction?
 /*
 Create 5 objects for stores
 Objects should have functions

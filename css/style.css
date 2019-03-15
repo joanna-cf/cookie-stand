@@ -21,7 +21,11 @@ header {
   margin-bottom: 30px;
 }
 
-h1 {
+header > a {
+  text-decoration: none;
+}
+
+header > a > h1 {
   font-family: 'Yellowtail', serif;
   font-size: 6em;
   font-weight: bold;
@@ -30,7 +34,7 @@ h1 {
   text-align: center;
 }
 
-header > img {
+header > a > img {
   width: 200px;
   opacity: 0.8;
   display: block;
@@ -38,7 +42,7 @@ header > img {
   margin-bottom: 20px;
 }
 
-header > h2 {
+header > a > h2 {
   text-align: center;
   font-size: 1.2em;
   font-family: 'Lato', Helvetica, sans-serif;
@@ -83,6 +87,7 @@ main > h2 {
   font-family: 'Lato', Helvetica, sans-serif;
   font-weight: bold;
   margin-bottom: 30px;
+  letter-spacing: 0.1em;
 }
 
 main > ul > li > p {
@@ -128,10 +133,6 @@ td {
 
 tfoot >tr > td {
   color: #EFC0A0;
-}
-
-#locationTitle {
-  letter-spacing: 0.1em;
 }
 
 main > form > fieldset {
