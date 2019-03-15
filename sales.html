@@ -4,41 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/reset.css">
   <link href="css/style.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato|Yellowtail" rel="stylesheet">
-  <title>Sales Page</title>
+  <title>Salmookies : Location Statistics</title>
 </head>
 <body>
-  <h1>Salmookies</h1>
-  <a href="index.html"><img src="images/salmon.png"></a>
-  <h2>The Original Salmon Cookies</h2>
+  <header>
+    <a href="index.html">
+      <h1>Salmookies</h1>
+      <img src="images/salmon.png">
+      <h2>The Original Salmon Cookies</h2>
+    </a>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="">About</a></li>
+      <li><a href="">Events</a></li>
+      <li><a href="sales.html">Location Statistics</a></li>
+      <li><a href="merch.html">Merchandise</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Cookie Sales By Location</h2>
 
-  <ul id="nav">
-    <li><a href="">About</a></li>
-    <li><a href="">Prices</a></li>
-    <li><a href="">Location Statistics</a></li>
-    <li><a href="">Contact Us</a></li>
-  </ul>
-
-  <h2 id="locationTitle">Cookie Sales By Location</h2>
+    <table id="cookie-table"></table>
   
-  <table id="cookie-table"></table>
-
-  <form id="locationForm">
-    <fieldset>
-      <legend>Enter New Location Information</legend>
-      <label>Store name</label>
-      <input type="text" name="storeName">
-      <label>Minimum Customers</label>
-      <input type="text" name="minCust">
-      <label>Maximum Customers</label>
-      <input type="text" name="maxCust">
-      <label>Average Cookie Sold Per Customer</label>
-      <input type="text" name="avgCookie">
-      <input type="submit" id="doneButton" value="Done">
-    </fieldset>
-  </form>
-
+    <form id="locationForm">
+      <fieldset>
+        <legend>Enter New Location Information</legend>
+        <label>Store name</label>
+        <input type="text" name="storeName" required>
+        <label>Minimum Customers</label>
+        <input type="number" name="minCust" required>
+        <label>Maximum Customers</label>
+        <input type="number" name="maxCust" required>
+        <label>Average Cookie Sold Per Customer</label>
+        <input type="number" name="avgCookie" required>
+        <input type="submit" id="doneButton" value="Done">
+      </fieldset>
+    </form>
+  </main>
+  <footer>
+    <h2 id="slogan">Salmookies: The Taste of the Pacific Northwest</h2>
+    <ul>
+      <li><img src="images/chinook.jpg" alt="chinook"></li>
+      <li><img src="images/cutter.jpeg" alt="cutter"></li>
+      <li><img src="images/family.jpg" alt="family"></li>
+      <li><img src="images/fish.jpg" alt="fish"></li>
+      <li><img src="images/frosted-cookie.jpg" alt="cookie"></li>
+      <li><img src="images/shirt.jpg" alt="shirt"></li>
+      <li><img src="images/chinook.jpg" alt="chinook"></li>
+      <li><img src="images/cutter.jpeg" alt="cutter"></li>
+      <li><img src="images/family.jpg" alt="family"></li>
+      <li><img src="images/fish.jpg" alt="fish"></li>
+      <li><img src="images/frosted-cookie.jpg" alt="cookie"></li>
+      <li><img src="images/shirt.jpg" alt="shirt"></li>
+      <li><img src="images/chinook.jpg" alt="chinook"></li>
+      <li><img src="images/cutter.jpeg" alt="cutter"></li>
+      <li><img src="images/family.jpg" alt="family"></li>
+      <li><img src="images/fish.jpg" alt="fish"></li>
+      <li><img src="images/frosted-cookie.jpg" alt="cookie"></li>
+      <li><img src="images/shirt.jpg" alt="shirt"></li>
+    </ul>
+  </footer>
   <script src="js/salesapp.js"></script>
 </body>
 </html>

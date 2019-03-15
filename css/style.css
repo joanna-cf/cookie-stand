@@ -1,12 +1,237 @@
 /*
-Title: Quicksand Google font
+Title: Yellowtail Google font
 Body: Lato Google font
-TODO: Make store names all caps?
+TODO: Be able to scale page to window size
 */
 
+@import url('https://fonts.googleapis.com/css?family=Lato|Yellowtail');
+
+*{
+  box-sizing: border-box;
+  font-family: 'Lato', Helvetica, sans-serif;
+  color: #EFC0A0;
+  text-align: center
+}
+
+header {
+  height: 120x;
+  width: 960px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+header > a {
+  text-decoration: none;
+}
+
+header > a > h1 {
+  font-family: 'Yellowtail', serif;
+  font-size: 6em;
+  font-weight: bold;
+  color: #870C35;
+  text-shadow: 3px 3px 5px black;
+  text-align: center;
+}
+
+header > a > img {
+  width: 200px;
+  opacity: 0.8;
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+header > a > h2 {
+  text-align: center;
+  font-size: 1.2em;
+  font-family: 'Lato', Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+nav {
+  background-color: #EFC0A030;
+  height: 60px;
+  width: 960px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+nav > ul {
+  float: left;
+  height: 40px;
+  padding: 10px 0;
+}
+
+nav > ul > li { /* Aspect ratio box to get the links to scale */
+  float: left;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 12.5px;
+}
+
+nav > ul > li > a {
+  font-family: 'Lato', Helvetica, sans-serif;
+  color: #870C35;
+}
+
+main {
+  width: 960px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+main > h2 {
+  text-align: center;
+  font-size: 1.4em;
+  font-family: 'Lato', Helvetica, sans-serif;
+  font-weight: bold;
+  margin-bottom: 30px;
+  letter-spacing: 0.1em;
+}
+
+main > ul > li > p {
+  margin: auto;
+  margin-bottom: 15px;
+  max-width: 480px;
+  letter-spacing: 0.05em;
+}
+
+main > table {
+  text-align: center;
+  border: 1px solid black;
+  margin: auto;
+  border-collapse: collapse;
+  max-width: 960px;
+}
+
+thead > tr > td {
+  color: #EFC0A0;
+}
+
+tbody {
+  border: 1px solid black;
+  background-color: #EFC0A030;
+}
+
+tbody:hover{
+  background-color: #EFC0A0;
+}
+
+th {
+  color:#870C35; 
+  letter-spacing: 0.1em; 
+  padding: 10px;
+  height: 50px;
+  text-transform: capitalize;
+}
+
+td {
+  padding: 5px;
+  color: grey;
+}
+
+tfoot >tr > td {
+  color: #EFC0A0;
+}
+
+main > form > fieldset {
+  margin-left: -40px;
+  border-radius: 5px;
+  width: 480px;
+  border: 1px solid darkgrey;
+}
+
+main > form > fieldset > legend {
+  font-weight: bold;
+  color: #870C35;
+  background-color: #EFC0A030;
+  padding: 10px;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+}
+
+main > form > fieldset > label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 240px;
+  text-align: right;
+  padding: 10px;
+}
+
+main > form > fieldset > input {
+  float: left;
+  position: relative;
+  /* left: 5px; */
+  border-radius: 5px;
+  margin: 10px;
+  color: black;
+}
+
+main > form > fieldset > input:focus {
+  background-color: lightgrey;
+}
+
+#locationForm {
+  margin: auto;
+  padding: 40px;
+  display: block;
+  width: 480px;
+}
+
+#doneButton {
+  background-color: #EFC0A030;
+  color: #870C35;
+  position: relative;
+  left: -55px;
+  margin: 20px;
+  padding: 5px 20px;
+}
+
+#doneButton:hover {
+  background-color: #EFC0A0;
+}
+
+footer {
+  height: 160px;
+  width: 960px;
+  margin: auto;
+  overflow: hidden;
+}
+
+footer > h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color:#870C35;
+  font-size: 1.5em;
+  font-family: 'Yellowtail', serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+footer > ul > li {
+  float: left; 
+  height: 120px;
+}
+
+footer > ul > li > img {
+  height: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+/*
 body {
   margin: 20px;
-  /* border: 2px dotted black; */
+  /* border: 2px dotted black;
   padding: 20px;
   font-family: 'Lato', Helvetica, sans-serif;
   background-color: white;
@@ -24,7 +249,7 @@ h1 {
 }
 
 /*Cite: Opacity https://www.w3schools.com/css/css_image_transparency.asp */
-img {
+/* img {
   opacity: 0.8;
   width: 200px;
   z-index: 1;
@@ -59,7 +284,7 @@ p {
   font-family: 'Yellowtail', serif;
 }
 
-/* Styling the Table */
+/* Styling the Table
 
 #cookie-table {
   text-align: center;
@@ -102,7 +327,7 @@ tfoot {
   letter-spacing: 0.1em;
 }
 
-/* Styling the form */
+/* Styling the form
 
 fieldset {
   border-radius: 5px;
@@ -117,7 +342,7 @@ legend {
 }
 
 label {
-  /* display: block; */
+  /* display: block;
   float: left;
   clear: left;
   width: 200px;
@@ -156,3 +381,4 @@ input:focus {
 #doneButton:hover {
   background-color: #EFC0A0;
 }
+*/

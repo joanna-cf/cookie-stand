@@ -1,5 +1,6 @@
 'use strict';
 
+//TODO: add a mouse interaction?
 /*
 Create 5 objects for stores
 Objects should have functions
@@ -194,21 +195,6 @@ function renderAll (){
 
 renderAll();
 
-
-// CODE DEMO CLASS 8
-// var first_div = document.getElementById('first');
-// var eventHandler = function(formSubmit){
-//   formSubmit.preventDefault();
-//   console.log(formSubmit);
-// };
-// first_div.addEventListener('click', eventHandler);
-
-// var username = formSubmit.target.username.value;
-
-// storeTable.innerHTML = '';
-// renderTable();
-// cookieStores.push(newStore);
-
 //PLANNING:
 //create event, get element by ID
 //function of what we want to do when this even happens
@@ -240,6 +226,3 @@ function submitForm(event){
 
 //Event Listener
 storesForm.addEventListener('submit', submitForm);
-
-//TODO:
-//Error correction on input
